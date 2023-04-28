@@ -1,0 +1,22 @@
+ANTLR = antlr-4.9.2-complete.jar
+JAVAC = javac
+JAVA = java
+MAIN = SuggestionEngine
+GRAMMAR = Java8
+
+all:
+	$(JAVAC) -cp .;$(ANTLR) *.java
+
+run: clean all
+	$(JAVA) -cp .;$(ANTLR) -Djava.util.logging.config.file=logging.properties $(MAIN) getProper 3 < input\System.java
+
+run2: clean all
+	$(JAVA) -cp .;$(ANTLR) -Djava.util.logging.config.file=logging.properties $(MAIN) toUpper 3 < input\String.java
+
+test: clean all
+	$(JAVA) -cp .;$(ANTLR) -Djava.util.logging.config.file=logging.properties $(MAIN) getProper 3 < input\test.java
+
+clean:
+	del *.class
+
+.PHONY: clean all
